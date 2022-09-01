@@ -5,4 +5,4 @@ serviceA:
   pipelineName: Service-A-Master
   nodePool: k8_pool
   artifactory: Artifactory
-  imageName: serviceA
+  imageName: serviceAdocker
