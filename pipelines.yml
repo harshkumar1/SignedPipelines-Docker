@@ -48,7 +48,7 @@ pipelines:
           inputResources:
             - name: dbp_repo
           integrations:
-            - name: {{ .Values.serviceA.Artifactory }}                             # <-- replace with your artifactory integration
+            - name: {{ .Values.serviceA.artifactory }}                             # <-- replace with your artifactory integration
 
       - name: docker_push
         type: DockerPush
@@ -56,7 +56,7 @@ pipelines:
           affinityGroup: dbp_group
           targetRepository: docker-local
           integrations:
-            - name: {{ .Values.serviceA.Artifactory }}                             # <-- replace with your artifactory integration
+            - name: {{ .Values.serviceA.artifactory }}                             # <-- replace with your artifactory integration
           inputSteps:
             - name: docker_build
           outputResources:
