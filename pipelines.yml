@@ -36,6 +36,8 @@ resources:
 
 pipelines:
   - name: pipeline_dbp
+    configuration:
+      nodePool: {{ .Values.serviceA.nodePool }}
     steps:
       - name: docker_build
         type: DockerBuild
