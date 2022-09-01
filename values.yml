@@ -1,0 +1,8 @@
+serviceA:
+  gitProvider: Github
+  path: harshkumar1/Service-A
+  branches: master
+  pipelineName: Service-A-Master
+  nodePool: k8-pool
+  artifactory: Artifactory
+  imageName: service-a
