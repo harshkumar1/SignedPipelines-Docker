@@ -15,7 +15,7 @@ resources:
     configuration:
       registry: {{ .Values.serviceA.artifactory }}
       sourceRepository: docker_local               # <-- required if registry is Artifactory
-      imageName: {{ .Values.serviceA.imageName }}
+      imageName: demo.jfrog-pipelines.com/harsh-docker-local-repo/service-a #{{ .Values.serviceA.imageName }}
       imageTag: latest
       autoPull: true
       
@@ -45,7 +45,7 @@ pipelines:
           affinityGroup: dbp_group
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: {{ .Values.serviceA.imageName }}   # replace with your image path and name
+          dockerImageName: demo.jfrog-pipelines.com/harsh-docker-local-repo/service-a # {{ .Values.serviceA.imageName }}   # replace with your image path and name
           dockerImageTag: ${run_number}
           inputResources:
             - name: dbp_repo
