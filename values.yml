@@ -3,6 +3,6 @@ serviceA:
   path: harshkumar1/Service-A
   branches: master
   pipelineName: Service-A-Master
-  nodePool: k8-pool
+  nodePool: k8_pool
   artifactory: Artifactory
   imageName: service-a
