@@ -5,4 +5,4 @@ serviceA:
   pipelineName: Service-A-Master
   nodePool: k8_pool
   artifactory: Artifactory
-  imageName: demo.jfrog-pipelines.com/artifactory/harsh-docker-local-repo/service-a
+  imageName: demo.jfrog-pipelines.com/harsh-docker-local-repo/service-a
