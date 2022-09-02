@@ -1,40 +1,43 @@
+template: true   # required for local templates
+valuesFilePath: ./values.yml
+
 resources:
   - name: dbp_repo
     type: GitRepo
     configuration:
-      gitProvider: Github                       # <-- replace with your integration
-      path: harshkumar1/Service-A    # <-- replace with your repository name
+      gitProvider: {{ .Values.serviceA.gitProvider }}
+      path: {{ .Values.serviceA.path }}
       branches:
-        include: master
+        include: {{ .Values.serviceA.branches }} 
 
   - name: dbp_image
     type: Image
     configuration:
-      registry: Artifactory                                # <-- replace with your artifactory integration
-      sourceRepository: harsh-docker-local-repo               # <-- required if registry is Artifactory
-      imageName: demo.jfrog-pipelines.com/harsh-docker-local-repo/serviceA  # < -- replace with your image path and name
+      registry: {{ .Values.serviceA.artifactory }}
+      sourceRepository: {{ .Values.serviceA.repo }}               # <-- required if registry is Artifactory
+      imageName: {{ .Values.serviceA.imageName }}
       imageTag: latest
       autoPull: true
       
   - name: dbp_build_info
     type: BuildInfo
     configuration:
-      sourceArtifactory: Artifactory
+      sourceArtifactory: {{ .Values.serviceA.artifactory }}
       buildName: dbp_build
       buildNumber: 1    
 
-  - name: dbp_promoted_build_info
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: Artifactory
-      buildName: dbp_build
-      buildNumber: 1
+  #- name: dbp_promoted_build_info
+  #  type: BuildInfo
+  #  configuration:
+  #    sourceArtifactory: {{ .Values.serviceA.artifactory }}
+  #    buildName: dbp_build
+  #    buildNumber: 1
       
 
 pipelines:
   - name: pipeline_dbp
     configuration:
-      nodePool: k8_pool
+      nodePool: {{ .Values.serviceA.nodePool }}
     steps:
       - name: docker_build
         type: DockerBuild
@@ -42,20 +45,20 @@ pipelines:
           affinityGroup: dbp_group
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: demo.jfrog-pipelines.com/harsh-docker-local-repo/serviceA  # replace with your image path and name
+          dockerImageName: {{ .Values.serviceA.imageName }}   # replace with your image path and name
           dockerImageTag: ${run_number}
           inputResources:
             - name: dbp_repo
           integrations:
-            - name: Artifactory                            # <-- replace with your artifactory integration
+            - name: {{ .Values.serviceA.artifactory }}                             # <-- replace with your artifactory integration
 
       - name: docker_push
         type: DockerPush
         configuration:
           affinityGroup: dbp_group
-          targetRepository: harsh-docker-local-repo ‹ <-- replace with your target repo
+          targetRepository: {{ .Values.serviceA.repo }}
           integrations:
-            - name: Artifactory                            # <-- replace with your artifactory integration
+            - name: {{ .Values.serviceA.artifactory }}                             # <-- replace with your artifactory integration
           inputSteps:
             - name: docker_build
           outputResources:
@@ -69,13 +72,13 @@ pipelines:
           outputResources:
             - name: dbp_build_info
 
-      - name: promote_dbp_build
-        type: PromoteBuild
-        configuration:
-          targetRepository: demo-pipelines
-          integrations:
-            - name: Artifactory # <-- replace with your artifactory integration
-          inputResources:
-            - name: dbp_build_info
-          outputResources:
-            - name: dbp_promoted_build_info
+      #- name: promote_dbp_build
+      #  type: PromoteBuild
+      #  configuration:
+      #    targetRepository: demo-pipelines
+      #    integrations:
+      #      - name: {{ .Values.serviceA.artifactory }}
+      #    inputResources:
+      #      - name: dbp_build_info
+      #    outputResources:
+      #      - name: dbp_promoted_build_info
