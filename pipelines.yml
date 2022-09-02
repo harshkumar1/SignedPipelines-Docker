@@ -5,31 +5,31 @@ resources:
   - name: dbp_repo
     type: GitRepo
     configuration:
-      gitProvider: {{ .Values.serviceA.gitProvider }}
-      path: {{ .Values.serviceA.path }}
+      gitProvider: {{ .Values.var.gitProvider }}
+      path: {{ .Values.var.path }}
       branches:
-        include: {{ .Values.serviceA.branches }} 
+        include: {{ .Values.var.branches }} 
 
   - name: dbp_image
     type: Image
     configuration:
-      registry: {{ .Values.serviceA.artifactory }}
-      sourceRepository: {{ .Values.serviceA.repo }}               # <-- required if registry is Artifactory
-      imageName: {{ .Values.serviceA.imageName }}
+      registry: {{ .Values.var.artifactory }}
+      sourceRepository: {{ .Values.var.repo }}               # <-- required if registry is Artifactory
+      imageName: {{ .Values.var.imageName }}
       imageTag: latest
       autoPull: true
       
   - name: dbp_build_info
     type: BuildInfo
     configuration:
-      sourceArtifactory: {{ .Values.serviceA.artifactory }}
+      sourceArtifactory: {{ .Values.var.artifactory }}
       buildName: dbp_build
       buildNumber: 1    
 
   #- name: dbp_promoted_build_info
   #  type: BuildInfo
   #  configuration:
-  #    sourceArtifactory: {{ .Values.serviceA.artifactory }}
+  #    sourceArtifactory: {{ .Values.var.artifactory }}
   #    buildName: dbp_build
   #    buildNumber: 1
       
@@ -37,7 +37,7 @@ resources:
 pipelines:
   - name: pipeline_serviceA
     configuration:
-      nodePool: {{ .Values.serviceA.nodePool }}
+      nodePool: {{ .Values.var.nodePool }}
     steps:
       - name: docker_build
         type: DockerBuild
@@ -45,20 +45,20 @@ pipelines:
           affinityGroup: dbp_group
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: {{ .Values.serviceA.imageName }}   # replace with your image path and name
+          dockerImageName: {{ .Values.var.imageName }}   # replace with your image path and name
           dockerImageTag: ${run_number}
           inputResources:
             - name: dbp_repo
           integrations:
-            - name: {{ .Values.serviceA.artifactory }}                             # <-- replace with your artifactory integration
+            - name: {{ .Values.var.artifactory }}                             # <-- replace with your artifactory integration
 
       - name: docker_push
         type: DockerPush
         configuration:
           affinityGroup: dbp_group
-          targetRepository: {{ .Values.serviceA.repo }}
+          targetRepository: {{ .Values.var.repo }}
           integrations:
-            - name: {{ .Values.serviceA.artifactory }}                             # <-- replace with your artifactory integration
+            - name: {{ .Values.var.artifactory }}                             # <-- replace with your artifactory integration
           inputSteps:
             - name: docker_build
           outputResources:
@@ -77,7 +77,7 @@ pipelines:
       #  configuration:
       #    targetRepository: demo-pipelines
       #    integrations:
-      #      - name: {{ .Values.serviceA.artifactory }}
+      #      - name: {{ .Values.var.artifactory }}
       #    inputResources:
       #      - name: dbp_build_info
       #    outputResources:
