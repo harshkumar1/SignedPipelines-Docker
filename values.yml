@@ -1,4 +1,5 @@
 var:
+  pipelineName: pipeline_serviceA
   gitProvider: Github
   path: harshkumar1/Service-A
   branches: master
