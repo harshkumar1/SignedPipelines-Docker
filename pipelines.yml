@@ -35,7 +35,7 @@ resources:
       
 
 pipelines:
-  - name: pipeline_dbp
+  - name: pipeline_serviceA
     configuration:
       nodePool: {{ .Values.serviceA.nodePool }}
     steps:
