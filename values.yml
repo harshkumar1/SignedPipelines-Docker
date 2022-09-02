@@ -3,7 +3,7 @@ var:
   gitProvider: Github
   path: harshkumar1/Service-A
   branches: master
-  pipelineName: Service-A-Master
+  #pipelineName: Service-A-Master
   nodePool: k8_pool
   artifactory: Artifactory
   repo: harsh-docker-local-repo
