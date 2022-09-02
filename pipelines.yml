@@ -15,7 +15,7 @@ resources:
     configuration:
       registry: {{ .Values.serviceA.artifactory }}
       sourceRepository: docker_local               # <-- required if registry is Artifactory
-      imageName: demo.jfrog-pipelines.com/harsh-docker-local-repo/service-a #{{ .Values.serviceA.imageName }}
+      #imageName: {{ .Values.serviceA.imageName }}
       imageTag: latest
       autoPull: true
       
