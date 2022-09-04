@@ -71,7 +71,11 @@ pipelines:
             - name: docker_push
           outputResources:
             - name: dbp_build_info
-
+            
+      - name: approvalGatesStep
+        type: Bash
+        configuration:
+          requiresApproval: true
       #- name: promote_dbp_build
       #  type: PromoteBuild
       #  configuration:
