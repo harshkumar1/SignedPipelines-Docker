@@ -76,6 +76,9 @@ pipelines:
         type: Bash
         configuration:
           requiresApproval: true
+        execution:
+          onExecute:
+            - echo "executing step..."
       #- name: promote_dbp_build
       #  type: PromoteBuild
       #  configuration:
