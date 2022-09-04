@@ -71,7 +71,7 @@ pipelines:
           inputSteps:
             - name: docker_push
           outputResources:
-            - name: dbp_build_info
+            - name: service_a_build_info
 
       #- name: promote_dbp_build
       #  type: PromoteBuild
