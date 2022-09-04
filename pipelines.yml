@@ -42,12 +42,11 @@ pipelines:
       - name: docker_build
         type: DockerBuild
         configuration:
-          affinityGroup: dbp_group
+          affinityGroup: docker_build_push
           dockerFileLocation: .
           dockerFileName: Dockerfile
           dockerImageName: {{ .Values.var.imageName }}   # replace with your image path and name
           dockerImageTag: ${run_number}
-          requiresApproval: true
           inputResources:
             - name: dbp_repo
           integrations:
@@ -56,7 +55,7 @@ pipelines:
       - name: docker_push
         type: DockerPush
         configuration:
-          affinityGroup: dbp_group
+          affinityGroup: docker_build_push
           targetRepository: {{ .Values.var.repo }}
           integrations:
             - name: {{ .Values.var.artifactory }}                             # <-- replace with your artifactory integration
@@ -68,6 +67,7 @@ pipelines:
       - name: publish_dbp_build
         type: PublishBuildInfo
         configuration:
+          requiresApproval: true
           inputSteps:
             - name: docker_push
           outputResources:
