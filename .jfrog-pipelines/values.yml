@@ -8,4 +8,3 @@ var:
   artifactory: Artifactory
   repo: docker-release
   imageName: harsh.jfrogdev.org/docker-release/service-a
-  docker-release/
