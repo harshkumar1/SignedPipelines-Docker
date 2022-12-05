@@ -4,7 +4,7 @@ var:
   path: harshkumar1/Service-A
   branches: main
   #pipelineName: Service-A-Master
-  nodePool: build-nodes
+  nodePool: default-dynamic-nodepool
   artifactory: Artifactory
   repo: sign-art-docker-release
   imageName: harsh.jfrogdev.org/sign-art-docker-release/service-a
