@@ -84,7 +84,7 @@ pipelines:
             - name: service_a_build_info
         execution:
           onExecute:
-            - response=$(validate_artifact buildInfo --build-name ${res_signed_buildinfo_buildName} --build-number ${res_signed_buildinfo_buildNumber})
+            - response=$(validate_artifact buildInfo --build-name ${ .Values.var.pipelineName } --build-number ${run_number})
             - validateResult=$(echo "$response" | jq '.result')
             - if [ "$validateResult" != "true" ]; then echo "failed validation" && exit 1; fi
 
