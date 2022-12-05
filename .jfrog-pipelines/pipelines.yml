@@ -67,7 +67,7 @@ pipelines:
       - name: publish_dbp_build
         type: PublishBuildInfo
         configuration:
-          requiresApproval: true
+          requiresApproval: false
           inputSteps:
             - name: docker_push
           outputResources:
