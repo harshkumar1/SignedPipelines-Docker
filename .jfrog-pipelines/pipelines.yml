@@ -56,7 +56,7 @@ pipelines:
         type: DockerPush
         configuration:
           affinityGroup: docker_build_push
-          autoPublishBuildInfo: true
+          autoPublishBuildInfo: false
           forceXrayScan: false
           targetRepository: {{ .Values.var.repo }}
           integrations:
