@@ -7,4 +7,5 @@ var:
   nodePool: default-dynamic-nodepool
   artifactory: Artifactory
   repo: docker-release
-  imageName: harsh.jfrogdev.org/artifactory/docker-release/service-a
+  imageName: harsh.jfrogdev.org/docker-release/service-a
+  docker-release/
