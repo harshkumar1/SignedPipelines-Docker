@@ -2,9 +2,9 @@ var:
   pipelineName: pipeline_serviceA
   gitProvider: Github
   path: harshkumar1/Service-A
-  branches: master
+  branches: main
   #pipelineName: Service-A-Master
-  nodePool: k8_pool
+  nodePool: build-nodes
   artifactory: Artifactory
-  repo: harsh-docker-local-repo
-  imageName: demo.jfrog-pipelines.com/harsh-docker-local-repo/service-a
+  repo: sign-art-docker-release
+  imageName: harsh.jfrogdev.org/sign-art-docker-release/service-a
