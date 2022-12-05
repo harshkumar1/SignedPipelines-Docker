@@ -24,7 +24,7 @@ resources:
     configuration:
       sourceArtifactory: {{ .Values.var.artifactory }}
       buildName: dbp_build
-      buildNumber: 1    
+      buildNumber: ${run_number}  
 
   #- name: dbp_promoted_build_info
   #  type: BuildInfo
@@ -56,6 +56,8 @@ pipelines:
         type: DockerPush
         configuration:
           affinityGroup: docker_build_push
+          autoPublishBuildInfo: true
+          forceXrayScan: false
           targetRepository: {{ .Values.var.repo }}
           integrations:
             - name: {{ .Values.var.artifactory }}                             # <-- replace with your artifactory integration
@@ -63,7 +65,7 @@ pipelines:
             - name: docker_build
           outputResources:
             - name: dbp_image
-
+        
       - name: publish_dbp_build
         type: PublishBuildInfo
         configuration:
