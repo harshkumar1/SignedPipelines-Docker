@@ -76,6 +76,7 @@ pipelines:
             - name: service_a_build_info
 
       - name: test_signed_stop
+        type: Bash
         steps:
         - name: validate_info
           type: Bash
@@ -89,7 +90,7 @@ pipelines:
               - response=$(validate_artifact buildInfo --build-name ${res_signed_buildinfo_buildName} --build-number ${res_signed_buildinfo_buildNumber})
               - validateResult=$(echo "$response" | jq '.result')
               - if [ "$validateResult" != "true" ]; then echo "failed validation" && exit 1; fi
-              
+
       #- name: promote_dbp_build
       #  type: PromoteBuild
       #  configuration:
