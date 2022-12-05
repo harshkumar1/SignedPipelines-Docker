@@ -6,5 +6,5 @@ var:
   #pipelineName: Service-A-Master
   nodePool: default-dynamic-nodepool
   artifactory: Artifactory
-  repo: sign-art-docker-release
-  imageName: harsh.jfrogdev.org/sign-art-docker-release/service-a
+  repo: docker-release
+  imageName: harsh.jfrogdev.org/artifactory/docker-release/service-a
