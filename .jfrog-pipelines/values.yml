@@ -1,6 +1,6 @@
 var:
   pipelineName: pipeline_serviceA
-  gitProvider: Github
+  gitProvider: GitHub
   path: harshkumar1/Service-A
   branches: main
   #pipelineName: Service-A-Master
