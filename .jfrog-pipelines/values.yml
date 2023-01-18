@@ -1,7 +1,7 @@
 var:
   pipelineName: pipeline_serviceA
-  gitProvider: GitHub
-  path: harshkumar1/Service-A
+  gitProvider: Github
+  path: harshkumar1/SignedPipelines-Docker
   branches: main
   #pipelineName: Service-A-Master
   nodePool: default-dynamic-nodepool
