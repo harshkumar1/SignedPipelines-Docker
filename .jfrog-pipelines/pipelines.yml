@@ -69,7 +69,6 @@ pipelines:
       - name: publish_dbp_build
         type: PublishBuildInfo
         configuration:
-          affinityGroup: docker_build_push
           requiresApproval: false
           inputSteps:
             - name: docker_push
@@ -79,7 +78,6 @@ pipelines:
       - name: validate_info
         type: Bash
         configuration:
-          affinityGroup: docker_build_push
           inputSteps:
           - name: publish_dbp_build
           inputResources:
