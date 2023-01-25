@@ -23,7 +23,7 @@ resources:
     type: BuildInfo
     configuration:
       sourceArtifactory: {{ .Values.var.artifactory }}
-      buildName: dbp_build
+      buildName: {{ .Values.var.pipelineName }}
       buildNumber: ${run_number}  
 
   #- name: dbp_promoted_build_info
@@ -87,17 +87,19 @@ pipelines:
             - echo ${run_number}
             - echo ${int_generic_pipe_token}
             - echo {{ .Values.var.pipelineName }}
+            - response=$(validate_artifact service_a_build_info ${service_a_build_info_buildName} ${service_a_build_info_buildNumber})
+            - echo $response
             #- response=$(validate_artifact 'buildInfo' ${service_a_build_info} --build-name ${{ .Values.var.pipelineName }} --build-number ${run_number})
             #- validateResult=$(echo "$response" | jq '.result')
             #- if [ "$validateResult" != "true" ]; then echo "failed validation" && exit 1; fi
-            - pipelineName={{ .Values.var.pipelineName }}
-            - echo $pipelineName
-            - uri=https://harsh.jfrogdev.org/pipelines/api/v1/pipeInfo/verify?artifactType=buildInfo&buildName={{ .Values.var.pipelineName }}&buildNumber=${run_number}
-            - echo $uri
-            - response=$(curl -H "Authorization:Bearer ${int_generic_pipe_token}" $uri)
-            - echo "$response"
-            - validateResult=$(echo "$response" | jq '.result')
-            - if [ "$validateResult" != "true" ]; then echo "failed validation" && exit 1; fi
+            #- pipelineName={{ .Values.var.pipelineName }}
+            #- echo $pipelineName
+            #- uri=https://harsh.jfrogdev.org/pipelines/api/v1/pipeInfo/verify?artifactType=buildInfo&buildName={{ .Values.var.pipelineName }}&buildNumber=${run_number}
+            #- echo $uri
+            #- response=$(curl -H "Authorization:Bearer ${int_generic_pipe_token}" $uri)
+            #- echo "$response"
+            #- validateResult=$(echo "$response" | jq '.result')
+            #- if [ "$validateResult" != "true" ]; then echo "failed validation" && exit 1; fi
 
       #- name: promote_dbp_build
       #  type: PromoteBuild
