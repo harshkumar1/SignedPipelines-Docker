@@ -92,8 +92,8 @@ pipelines:
             #- validateResult=$(echo "$response" | jq '.result')
             #- if [ "$validateResult" != "true" ]; then echo "failed validation" && exit 1; fi
             - uri=https://harsh.jfrogdev.org/pipelines/api/v1/pipeInfo/verify?artifactType=buildInfo&buildName={{ .Values.var.pipelineName }}&buildNumber=${run_number}
-            - echo ${uri}
-            - response=$(curl -H "Authorization:Bearer ${int_generic_pipe_token}" uri)
+            - echo $uri
+            - response=$(curl -H "Authorization:Bearer ${int_generic_pipe_token}" $uri)
             - echo "$response"
             - validateResult=$(echo "$response" | jq '.result')
             - if [ "$validateResult" != "true" ]; then echo "failed validation" && exit 1; fi
