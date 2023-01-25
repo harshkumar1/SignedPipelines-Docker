@@ -85,9 +85,9 @@ pipelines:
         execution:
           onExecute:
             - echo ${run_number}
-            - echo ${int_generic_pipe_token}
-            - echo {{ .Values.var.pipelineName }}
-            - response=$(validate_artifact service_a_build_info ${service_a_build_info_buildName} ${service_a_build_info_buildNumber})
+            - echo ${service_a_build_info_buildNumber}
+            - echo ${service_a_build_info_buildName}
+            - response=$(validate_artifact ${service_a_build_info} ${service_a_build_info_buildName} ${service_a_build_info_buildNumber})
             - echo $response
             #- response=$(validate_artifact 'buildInfo' ${service_a_build_info} --build-name ${{ .Values.var.pipelineName }} --build-number ${run_number})
             #- validateResult=$(echo "$response" | jq '.result')
