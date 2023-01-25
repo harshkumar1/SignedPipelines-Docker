@@ -65,10 +65,11 @@ pipelines:
             - name: docker_build
           outputResources:
             - name: dbp_image
-        
+
       - name: publish_dbp_build
         type: PublishBuildInfo
         configuration:
+          affinityGroup: docker_build_push
           requiresApproval: false
           inputSteps:
             - name: docker_push
@@ -78,19 +79,21 @@ pipelines:
       - name: validate_info
         type: Bash
         configuration:
+          affinityGroup: docker_build_push
           inputSteps:
           - name: publish_dbp_build
           inputResources:
             - name: service_a_build_info
         execution:
           onExecute:
-            - echo ${service_a_build_info}
             - echo ${run_number}
             - echo ${int_generic_pipe_token}
             - echo {{ .Values.var.pipelineName }}
             #- response=$(validate_artifact 'buildInfo' ${service_a_build_info} --build-name ${{ .Values.var.pipelineName }} --build-number ${run_number})
             #- validateResult=$(echo "$response" | jq '.result')
             #- if [ "$validateResult" != "true" ]; then echo "failed validation" && exit 1; fi
+            - pipelineName={{ .Values.var.pipelineName }}
+            - echo $pipelineName
             - uri=https://harsh.jfrogdev.org/pipelines/api/v1/pipeInfo/verify?artifactType=buildInfo&buildName={{ .Values.var.pipelineName }}&buildNumber=${run_number}
             - echo $uri
             - response=$(curl -H "Authorization:Bearer ${int_generic_pipe_token}" $uri)
