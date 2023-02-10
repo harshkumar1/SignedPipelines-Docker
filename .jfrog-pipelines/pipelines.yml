@@ -44,7 +44,7 @@ pipelines:
         configuration:
           affinityGroup: docker_build_push
           dockerFileLocation: .
-          dockerFileName: Dockerfile
+            dockerFileName: Dockerfile
           dockerImageName: {{ .Values.var.imageName }}   # replace with your image path and name
           dockerImageTag: ${run_number}
           inputResources:
