@@ -1,10 +1,10 @@
 var:
   pipelineName: SignedPipelinesDocker
-  gitProvider: harsh_github
+  gitProvider: Github
   path: harshkumar1/SignedPipelines-Docker
   branches: main
   #pipelineName: Service-A-Master
-  nodePool: u18dyn
+  nodePool: default-dynamic-nodepool
   artifactory: Artifactory
   repo: docker-release
   imageName: harsh.jfrogdev.org/docker-release/signedpipelinesdocker
