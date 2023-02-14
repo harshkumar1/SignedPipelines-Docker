@@ -4,7 +4,7 @@ var:
   path: harshkumar1/SignedPipelines-Docker
   branches: main
   #pipelineName: Service-A-Master
-  nodePool: default-dynamic-nodepool
+  nodePool: u18dyn
   artifactory: Artifactory
   repo: docker-release
   imageName: harsh.jfrogdev.org/docker-release/signedpipelinesdocker
