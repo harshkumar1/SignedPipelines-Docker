@@ -1,6 +1,6 @@
 var:
   pipelineName: SignedPipelinesDocker
-  gitProvider: Github
+  gitProvider: harsh_github
   path: harshkumar1/SignedPipelines-Docker
   branches: main
   #pipelineName: Service-A-Master
