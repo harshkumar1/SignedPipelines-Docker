@@ -3,7 +3,7 @@ var:
   gitProvider: harsh_github
   path: harshkumar1/SignedPipelines-Docker
   branches: main
-  nodePool: u18dyn
+  nodePool: awsnp
   artifactory: Artifactory
   repo: km-docker-local
   imageName: master.jfrog-pipelines.com/km-docker-local/signedpipelinesdocker
