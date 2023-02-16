@@ -5,5 +5,5 @@ var:
   branches: main
   nodePool: awsnp
   artifactory: Artifactory
-  repo: km-docker-local
-  imageName: master.jfrog-pipelines.com/km-docker-local/signedpipelinesdocker
+  repo: test-automation-docker-local
+  imageName: master.jfrog-pipelines.com/test-automation-docker-local/signedpipelinesdocker
