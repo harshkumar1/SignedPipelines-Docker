@@ -87,7 +87,7 @@ pipelines:
             - echo ${run_number}
             - echo ${res_service_a_build_info_buildNumber}
             - echo ${res_service_a_build_info_buildName}
-            - response=$(validate_artifact buildInfo --build-name ${res_service_a_build_info_buildName} --build-number ${res_service_a_build_info_buildName} --project-key default_source_id)
+            - response=$(validate_artifact buildInfo --build-name ${res_service_a_build_info_buildName} --build-number ${res_service_a_build_info_buildNumber} --project-key default_source_id)
             - echo $response
             - validateResult=$(echo "$response" | jq '.result')
             - if [ "$validateResult" != "true" ]; then echo "failed validation" && exit 1; fi
